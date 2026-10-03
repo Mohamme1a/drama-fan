@@ -1,0 +1,25 @@
+{
+  "overview": "A modern Arabic RTL streaming app for short dramas and short movies, with browsing, search, favorites, ratings, continue-watching, and an admin dashboard.",
+  "features": [
+    "Browse featured short dramas and movies on a mobile-first home page",
+    "Search and filter content by category and type",
+    "Open a title to see its cover, description, rating, and episode list",
+    "Watch episodes in a built-in video player with next/previous navigation",
+    "Save favorites and resume watching from where you left off",
+    "Rate titles from 1 to 5 stars",
+    "Switch between dark and light mode",
+    "Sign in to keep favorites, ratings, and progress per user",
+    "Admin dashboard to add, edit, and delete titles and episodes",
+    "Sample Arabic content ready to explore"
+  ],
+  "category": "streaming-app",
+  "tags": [
+    "arabic",
+    "rtl",
+    "streaming",
+    "drama",
+    "video",
+    "mobile-first"
+  ],
+  "last_updated": "2026-10-03T09:14:35.106Z"
+}

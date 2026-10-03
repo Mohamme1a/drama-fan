@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Self-hosted Latin display/body/mono (Arabic glyphs fall back to the
+   system Arabic web font via the --font-* stacks below) ───────────────── */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 200 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Arabic-first stacks: self-hosted Latin face + system Arabic fallbacks */
+    --font-display: "Space Grotesk", "Noto Kufi Arabic", "Noto Sans Arabic",
+      "Cairo", "Tajawal", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    --font-body: "General Sans", "Noto Sans Arabic", "Cairo", "Tajawal",
+      "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    --font-mono: "JetBrains Mono", "Noto Sans Arabic", monospace;
+    --radius: 0.75rem;
+
+    /* Light mode — crisp, high-contrast, warm-neutral */
+    --background: 0.98 0.006 350;
+    --foreground: 0.18 0.02 350;
+    --card: 1.0 0.003 350;
+    --card-foreground: 0.18 0.02 350;
+    --popover: 1.0 0.003 350;
+    --popover-foreground: 0.18 0.02 350;
+
+    --primary: 0.58 0.22 12;
+    --primary-foreground: 0.99 0.005 12;
+
+    --secondary: 0.95 0.012 350;
+    --secondary-foreground: 0.28 0.02 350;
+    --muted: 0.95 0.012 350;
+    --muted-foreground: 0.5 0.015 350;
+
+    --accent: 0.62 0.2 12;
+    --accent-foreground: 0.99 0.005 12;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.005 25;
+    --success: 0.55 0.16 150;
+    --success-foreground: 0.99 0.005 150;
+    --warning: 0.72 0.15 85;
+    --warning-foreground: 0.18 0.02 85;
+
+    --border: 0.9 0.01 350;
+    --input: 0.9 0.01 350;
+    --ring: 0.58 0.22 12;
+
+    --chart-1: 0.58 0.22 12;
+    --chart-2: 0.55 0.16 150;
+    --chart-3: 0.72 0.15 85;
+    --chart-4: 0.62 0.18 300;
+    --chart-5: 0.6 0.16 250;
+
+    --sidebar: 0.98 0.006 350;
+    --sidebar-foreground: 0.18 0.02 350;
+    --sidebar-primary: 0.58 0.22 12;
+    --sidebar-primary-foreground: 0.99 0.005 12;
+    --sidebar-accent: 0.95 0.012 350;
+    --sidebar-accent-foreground: 0.28 0.02 350;
+    --sidebar-border: 0.9 0.01 350;
+    --sidebar-ring: 0.58 0.22 12;
+
+    /* Domain tokens */
+    --rating-star: 0.78 0.16 80; /* warm gold */
+    --nav-bar: 1.0 0.003 350;
+    --nav-bar-border: 0.9 0.01 350;
+    --nav-active: 0.58 0.22 12;
+    --nav-inactive: 0.5 0.015 350;
+    --overlay-scrim: 0.12 0.01 350;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.62 0.23 12) 0%,
+      oklch(0.54 0.2 350) 100%
+    );
+    --gradient-scrim: linear-gradient(
+      to top,
+      oklch(0.1 0.01 350 / 0.96) 0%,
+      oklch(0.1 0.01 350 / 0.55) 45%,
+      oklch(0.1 0.01 350 / 0) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.99 0.005 350) 0%,
+      oklch(0.96 0.01 350) 100%
+    );
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Dark mode — cinematic plum-black, the primary brand experience */
+    --background: 0.145 0.014 340;
+    --foreground: 0.95 0.008 340;
+    --card: 0.19 0.016 340;
+    --card-foreground: 0.95 0.008 340;
+    --popover: 0.22 0.018 340;
+    --popover-foreground: 0.95 0.008 340;
+
+    --primary: 0.68 0.21 12;
+    --primary-foreground: 0.145 0.014 12;
+
+    --secondary: 0.23 0.02 340;
+    --secondary-foreground: 0.86 0.008 340;
+    --muted: 0.23 0.02 340;
+    --muted-foreground: 0.6 0.012 340;
+
+    --accent: 0.68 0.21 12;
+    --accent-foreground: 0.145 0.014 12;
+
+    --destructive: 0.62 0.2 22;
+    --destructive-foreground: 0.96 0.008 22;
+    --success: 0.68 0.16 150;
+    --success-foreground: 0.145 0.014 150;
+    --warning: 0.78 0.15 85;
+    --warning-foreground: 0.145 0.014 85;
+
+    --border: 0.29 0.02 340;
+    --input: 0.29 0.02 340;
+    --ring: 0.68 0.21 12;
+
+    --chart-1: 0.68 0.21 12;
+    --chart-2: 0.68 0.16 150;
+    --chart-3: 0.78 0.15 85;
+    --chart-4: 0.65 0.2 300;
+    --chart-5: 0.66 0.17 250;
+
+    --sidebar: 0.19 0.016 340;
+    --sidebar-foreground: 0.95 0.008 340;
+    --sidebar-primary: 0.68 0.21 12;
+    --sidebar-primary-foreground: 0.145 0.014 12;
+    --sidebar-accent: 0.23 0.02 340;
+    --sidebar-accent-foreground: 0.86 0.008 340;
+    --sidebar-border: 0.29 0.02 340;
+    --sidebar-ring: 0.68 0.21 12;
+
+    /* Domain tokens */
+    --rating-star: 0.82 0.16 82;
+    --nav-bar: 0.175 0.016 340;
+    --nav-bar-border: 0.28 0.02 340;
+    --nav-active: 0.68 0.21 12;
+    --nav-inactive: 0.6 0.012 340;
+    --overlay-scrim: 0.1 0.01 340;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.7 0.22 12) 0%,
+      oklch(0.6 0.2 350) 100%
+    );
+    --gradient-scrim: linear-gradient(
+      to top,
+      oklch(0.08 0.01 340 / 0.97) 0%,
+      oklch(0.08 0.01 340 / 0.6) 45%,
+      oklch(0.08 0.01 340 / 0) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.19 0.016 340) 0%,
+      oklch(0.145 0.014 340) 100%
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    direction: rtl;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-scrim {
+    background-image: var(--gradient-scrim);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .shadow-nav {
+    box-shadow: var(--shadow-nav);
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}

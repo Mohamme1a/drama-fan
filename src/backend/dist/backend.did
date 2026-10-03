@@ -1,0 +1,168 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TitleView = 
+ record {
+   averageRating: float64;
+   category: text;
+   coverImage: text;
+   description: text;
+   episodeCount: nat;
+   id: nat;
+   kind: TitleType;
+   published: bool;
+   ratingCount: nat;
+   releaseYear: nat;
+   title: text;
+ };
+type TitleType = 
+ variant {
+   drama;
+   movie;
+ };
+type TitleInput = 
+ record {
+   category: text;
+   coverImage: text;
+   description: text;
+   kind: TitleType;
+   published: bool;
+   releaseYear: nat;
+   title: text;
+ };
+type TitleFilter = 
+ record {
+   category: opt text;
+   kind: opt TitleType;
+   searchTerm: opt text;
+ };
+type Result__1 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result_1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ variant {
+   err: ContentError;
+   ok;
+ };
+type RatingSummary = 
+ record {
+   average: float64;
+   count: nat;
+   userRating: opt nat;
+ };
+type HomeFeed = 
+ record {
+   featured: vec TitleView;
+   mostWatched: vec TitleView;
+   newlyAdded: vec TitleView;
+   shortDramas: vec TitleView;
+   shortMovies: vec TitleView;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type EpisodeView = 
+ record {
+   durationSeconds: nat;
+   id: nat;
+   number: nat;
+   title: text;
+   titleId: nat;
+   videoSource: text;
+ };
+type EpisodeInput = 
+ record {
+   durationSeconds: nat;
+   number: nat;
+   title: text;
+   titleId: nat;
+   videoSource: text;
+ };
+type ContinueWatchingItem = 
+ record {
+   durationSeconds: nat;
+   episode: EpisodeView;
+   positionSeconds: nat;
+   title: TitleView;
+   updatedAt: int;
+ };
+type ContentError = 
+ variant {
+   invalidInput: text;
+   notAuthorized;
+   notFound;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result_1);
+  _internet_identity_sign_in_start: () -> (blob);
+  addFavorite: (titleId: nat) -> ();
+  adminCreateEpisode: (input: EpisodeInput) -> (nat);
+  adminCreateTitle: (input: TitleInput) -> (nat);
+  adminDeleteEpisode: (id: nat) -> (Result);
+  adminDeleteTitle: (id: nat) -> (Result);
+  adminListTitles: () -> (vec TitleView) query;
+  adminSeedSampleContent: () -> ();
+  adminUpdateEpisode: (id: nat, input: EpisodeInput) -> (Result);
+  adminUpdateTitle: (id: nat, input: TitleInput) -> (Result);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  execute: (qJson: text) -> (Result__1) query;
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getHomeFeed: () -> (HomeFeed) query;
+  getRatingSummary: (titleId: nat) -> (RatingSummary) query;
+  getTitle: (id: nat) -> (opt TitleView) query;
+  isCallerAdmin: () -> (bool) query;
+  listContinueWatching: () -> (vec ContinueWatchingItem) query;
+  listEpisodes: (titleId: nat) -> (vec EpisodeView) query;
+  listFavorites: () -> (vec TitleView) query;
+  listTitles: (filter: TitleFilter) -> (vec TitleView) query;
+  rateTitle: (titleId: nat, stars: nat) -> (Result);
+  removeFavorite: (titleId: nat) -> ();
+  saveProgress: (episodeId: nat, positionSeconds: nat, durationSeconds:
+   nat) -> ();
+  schema: () -> (text) query;
+}

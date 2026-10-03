@@ -1,0 +1,142 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type ContentState__294587990 =
+  {var nextEpisodeId : Nat; var nextTitleId : Nat};
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type Data__846125122<T> = {var count : Nat__227979830; elements : [var ?T]};
+type Episode__436198509 =
+  {
+    createdAt : Int;
+    durationSeconds : Nat;
+    id : Nat;
+    number : Nat;
+    title : Text;
+    titleId : Nat;
+    videoSource : Text
+  };
+type Episode__867732700 =
+  {
+    createdAt : Int;
+    durationSeconds : Nat;
+    id : Nat;
+    number : Nat;
+    title : Text;
+    titleId : Nat;
+    videoSource : Text
+  };
+type Internal__23036296<T> =
+  {children : [var ?Node__620761243<T>]; data : Data__846125122<T>};
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Leaf__948582970<T> = {data : Data__846125122<T>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__201339279;
+    episodes : Map__230067015<Nat, Episode__436198509>;
+    favorites : Map__230067015<Principal, Set__70493310<Nat>>;
+    progress :
+      Map__230067015<Principal, Map__230067015<Nat, Progress__424964745>>;
+    ratings : Map__230067015<Nat, Map__230067015<Principal, Nat>>;
+    state : ContentState__294587990;
+    titles : Map__230067015<Nat, Title__644594399>;
+    watchCounts : Map__230067015<Nat, Nat>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type Node__620761243<T> =
+  {#internal : Internal__23036296<T>; #leaf : Leaf__948582970<T>};
+type OldActor__512397517 = {};
+type Progress__424964745 =
+  {
+    durationSeconds : Nat;
+    episodeId : Nat;
+    positionSeconds : Nat;
+    updatedAt : Int
+  };
+type Progress__877598478 =
+  {
+    durationSeconds : Nat;
+    episodeId : Nat;
+    positionSeconds : Nat;
+    updatedAt : Int
+  };
+type Set__1053317950<T> =
+  {var root : Node__620761243<T>; var size : Nat__227979830};
+type Set__70493310<T> = Set__1053317950<T>;
+type TitleType__462211172 = {#drama; #movie};
+type TitleType__817923856 = {#drama; #movie};
+type Title__644594399 =
+  {
+    category : Text;
+    coverImage : Text;
+    createdAt : Int;
+    description : Text;
+    id : Nat;
+    kind : TitleType__817923856;
+    published : Bool;
+    releaseYear : Nat;
+    title : Text
+  };
+type Title__778266430 =
+  {
+    category : Text;
+    coverImage : Text;
+    createdAt : Int;
+    description : Text;
+    id : Nat;
+    kind : TitleType__462211172;
+    published : Bool;
+    releaseYear : Nat;
+    title : Text
+  };
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable episodes :
+    {
+      var root : Node__204828119<Nat, Episode__867732700>;
+      var size : Nat__227979830
+    };
+  stable favorites :
+    {
+      var root : Node__204828119<Principal, Set__70493310<Nat>>;
+      var size : Nat__227979830
+    };
+  stable progress :
+    {
+      var root :
+        Node__204828119<Principal, Map__230067015<Nat, Progress__877598478>>;
+      var size : Nat__227979830
+    };
+  stable ratings :
+    {
+      var root : Node__204828119<Nat, Map__230067015<Principal, Nat>>;
+      var size : Nat__227979830
+    };
+  stable state : {var nextEpisodeId : Nat; var nextTitleId : Nat};
+  stable titles :
+    {
+      var root : Node__204828119<Nat, Title__778266430>;
+      var size : Nat__227979830
+    };
+  stable watchCounts :
+    {var root : Node__204828119<Nat, Nat>; var size : Nat__227979830}
+};
